@@ -8,6 +8,7 @@ class Array:
 
     full_array = None
 
+
     def plot(self):
         if not test:
             vs.plot(Array.full_array)
@@ -212,3 +213,22 @@ def quick_sort(nums):  # n^2
             _quick_sort(items, split_index + 1, high)
 
     _quick_sort(nums, 0, nums.get_len() - 1)
+
+
+def count_sort(nums):  # O(n)
+    # this method cal sort the number between -10000 t0 10000
+    MAX_SIZE = 10000
+    old_values = nums.values;
+    counts = [0] * (2 * MAX_SIZE + 1)
+
+    for i in range(len(old_values)):
+        # count the occurence of all the number
+        counts[MAX_SIZE + nums.values[i]] =  counts[MAX_SIZE + nums.values[i]] + 1
+    # now create the sorted array based on count array
+    current_index = 0
+    for i in range(-10000, 10000):
+        while counts[MAX_SIZE + i] > 0:
+            nums.set(current_index, i)
+            counts[MAX_SIZE + i] = counts[MAX_SIZE + i] - 1
+            current_index = current_index + 1
+
